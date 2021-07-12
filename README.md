@@ -31,7 +31,7 @@ python train.py --logtostderr --train_dir=models/my_ssd_mobilenet_v1_lstm --pipe
 
 Links
 -----
-* [TensorFlow Models](https://github.com/tensorflow/models/tree/r1.13.0)
+* [TensorFlow Models](https://github.com/tensorflow/models)
 * [EPFL TFRecords](https://drive.google.com/drive/folders/148Ss13RS61af6KCZPEoF1SHUKJAEiDz9?usp=sharing)
 * [Baseline](https://github.com/LeenGadisseur/Tensorflow-OD-API-workspace)
 
