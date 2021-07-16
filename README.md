@@ -1,6 +1,6 @@
 # Tensorflow-OD-LSTM
 
-Repository voor het trainen van een object detector met Bottleneck-LSTM. We vergelijken dit later met het [baseline](https://github.com/LeenGadisseur/Tensorflow-OD-API-workspace) model wonder Bottleneck-LSTM.
+Repository voor het trainen van een object detector met Bottleneck-LSTM. We vergelijken dit later met het [baseline](https://github.com/LeenGadisseur/Tensorflow-OD-API-workspace) model zonder Bottleneck-LSTM.
 
 Requirements 
 ------------ 
