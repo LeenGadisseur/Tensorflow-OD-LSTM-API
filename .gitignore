@@ -1,0 +1,16 @@
+*.record
+annotations/*.record
+annotations/shards/*.record
+annotations/test_records/*.record
+scripts/pre_procesing/Data/EPFL/*.record
+scripts/pre_procesing/Data/EPFL/shards/*.record
+annotations/test_records/*.record
+scripts/pre_procesing/Data/EPFL/*.record
+
+
+models/my_ssd_mobilenet_v1_lstm/checkpoints/*
+lstm_object_detection/*
+pre-trained-models/*
+
+
+

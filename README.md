@@ -1,17 +1,24 @@
 # Tensorflow-OD-LSTM
 
+Repository voor het trainen van een object detector met Bottleneck-LSTM. We vergelijken dit later met het [baseline](https://github.com/LeenGadisseur/Tensorflow-OD-API-workspace) model wonder Bottleneck-LSTM.
 
 Requirements 
 ------------ 
-* Tensorflow 1.14.0
+* TensorFlow 1.14.0 (gpu)
 * Python 3.7
 * Cuda 10.0
 * CuDNN 7
 
-Installatie
+Installatie Object Detection API en 
 -----------
 De installatie van de Tensorflow object detection API kan je op deze
 [link](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/tensorflow-1.14/install.html) volgen. 
+Bij installatie van de [Object detection API](https://github.com/tensorflow/models) gebruik maken van de 
+research/object_detection/packages/tf1/setup.py aangezien we werken met TensorFlow 1.14.0.
+
+Indien error voor het importeren van resnet, zet import in commentaar in:
+anaconda3/env/tf1/lib/python3.7/site-packages/object_detection/meta_architectures/deepmac_meta_arch.py
+
 
 In research directory volgende commando uitvoeren:
 ``` 
