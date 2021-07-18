@@ -175,7 +175,10 @@ def main(_):
     task = task_info.index
     is_chief = (task_info.type == 'master')
     master = server.target
-
+  """print("Args trainer: ", '\n',create_input_dict_fn, '\n',model_fn, '\n',train_config, '\n',master, '\n',task,'\n',
+                FLAGS.num_clones, '\n',worker_replicas, '\n',FLAGS.clone_on_cpu, '\n',ps_tasks,
+                '\n',worker_job_name, '\n',is_chief, '\n',FLAGS.train_dir)"""
+                
   trainer.train(create_input_dict_fn, model_fn, train_config, master, task,
                 FLAGS.num_clones, worker_replicas, FLAGS.clone_on_cpu, ps_tasks,
                 worker_job_name, is_chief, FLAGS.train_dir)
