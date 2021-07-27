@@ -1,6 +1,7 @@
 *.record
 annotations/*.record
 annotations/shards/*.record
+annotations/shards-4fr/*.record
 annotations/test_records/*.record
 scripts/pre_procesing/Data/EPFL/*.record
 scripts/pre_procesing/Data/EPFL/shards/*.record

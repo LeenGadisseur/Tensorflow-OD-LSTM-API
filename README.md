@@ -31,10 +31,56 @@ Annotaties dataset
 ------------------
 TF-records staan niet bij in deze repository. Te downloaden van [hier](https://drive.google.com/drive/folders/148Ss13RS61af6KCZPEoF1SHUKJAEiDz9?usp=sharing) en in de annotaties map plaatsen.
 
-Commando voor trainen ssd_mobilenet_v1_lstm binnen conda environment.
+Gebruik van files
+------------------
+Het gebruik van de volgende files gebeurt steeds binnen de conda environment.
+Commando voor trainen ssd_mobilenet_v1_lstm.
 ```
-python train.py --logtostderr --train_dir=models/my_ssd_mobilenet_v1_lstm --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config
+python train.py --logtostderr \
+	--train_dir=models/my_ssd_mobilenet_v1_lstm \
+	--pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config 
+
 ```
+
+Commando voor evaluatie van ssd_mobilenet_v1_lstm.
+```
+python eval.py \
+        --logtostderr \
+        --checkpoint_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/model.ckpt-7000 \
+        --eval_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/eval \
+        --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config 
+
+```
+
+```
+python model_main.py \
+        --logtostderr \
+        --checkpoint_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/model.ckpt-7000 \
+        --eval_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/eval \
+        --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config 
+
+```
+
+Extraheren van een tflite graph.
+```
+python export_tflite_lstd_graph.py \
+    --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config \
+    --trained_checkpoint_prefix=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/model.ckpt-7000 \
+    --output_directory=models/my_ssd_mobilenet_v1_lstm_tflite/checkpoints/ckpt-96x96-b4-5k+7k
+
+```
+
+Omzetten naar een model file
+```
+python export_tflite_lstd_model.py \
+    --export_path=models/my_ssd_mobilenet_v1_lstm_tflite/checkpoints/ckpt-96x96-b4-5k+7k/ \
+    --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config \
+    --frozen_graph_path=models/my_ssd_mobilenet_v1_lstm_tflite/checkpoints/ckpt-96x96-b4-5k+7k/tflite_graph.pb \
+    --resolution=96
+
+```
+
+
 
 Links
 -----

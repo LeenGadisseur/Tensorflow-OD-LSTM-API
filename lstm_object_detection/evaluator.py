@@ -93,6 +93,9 @@ def _extract_prediction_tensors(model,
     tensor_dict: A tensor dictionary with evaluations.
   """
   input_dict = create_input_dict_fn()
+  print()
+  print("input_dict", input_dict)
+  print()
   batch = None
   if 'batch' in input_dict:
     batch = input_dict.pop('batch')
@@ -100,7 +103,7 @@ def _extract_prediction_tensors(model,
     prefetch_queue = prefetcher.prefetch(input_dict, capacity=500)
     input_dict = prefetch_queue.dequeue()
     # consistent format for images and videos
-    for key, value in input_dict.iteritems():
+    for key, value in input_dict.items():
       input_dict[key] = (value,)
 
   detections = _create_detection_op(model, input_dict, batch)
@@ -142,7 +145,7 @@ def _extract_prediction_tensors(model,
 
     detections_frame = {
         key: tf.expand_dims(value[i], 0)
-        for key, value in detections.iteritems()
+        for key, value in detections.items()
     }
 
     source_id = (
@@ -228,6 +231,7 @@ def evaluate(create_input_dict_fn,
                      batch_index,
                      counters,
                      losses_dict=None):
+                    
     """Evaluates tensors in tensor_dicts, visualizing the first K examples.
 
     This function calls sess.run on tensor_dicts, evaluating the original_image
@@ -251,6 +255,11 @@ def evaluate(create_input_dict_fn,
         losses_dict is None. Necessary only for matching function signiture in
         third_party eval_util.py.
     """
+    session_config = tf.ConfigProto()
+    # LEEN aanpassing voor CUDA errors (init cuda  & memory allocation)
+    session_config.gpu_options.allow_growth = True
+    session_config.gpu_options.per_process_gpu_memory_fraction = 0.7
+    sess = tf.Session(config=session_config)
     if batch_index % 10 == 0:
       tf.logging.info('Running eval ops batch %d', batch_index)
     if not losses_dict:
@@ -313,8 +322,13 @@ def evaluate(create_input_dict_fn,
 
   saver = tf.train.Saver(variables_to_restore)
 
-  def _restore_latest_checkpoint(sess):
+  def _restore_latest_checkpoint(sess):   
     latest_checkpoint = tf.train.latest_checkpoint(checkpoint_dir)
+    session_config = tf.ConfigProto()
+    # LEEN aanpassing voor CUDA errors (init cuda  & memory allocation)
+    session_config.gpu_options.allow_growth = True
+    session_config.gpu_options.per_process_gpu_memory_fraction = 0.7
+    sess = tf.Session(config=session_config)
     saver.restore(sess, latest_checkpoint)
 
   metrics = eval_util.repeated_checkpoint_run(

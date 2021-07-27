@@ -1,9 +1,9 @@
-import tensorflow.compat.v2 as tf 
+import tensorflow.compat.v1 as tf 
 
 
 
-filenames = ['./test_records/snapshot_serengeti_sequence_examples.record','test-EPFL-0.record','train-EPFL-0.record']
-raw_dataset = tf.data.TFRecordDataset(filenames[0])
+filenames = ['./test_records/snapshot_serengeti_sequence_examples.record','test-EPFL-0-4fr.record','shards/train-EPFL-00.record']
+raw_dataset = tf.data.TFRecordDataset(filenames[2])
 
 for raw_record in raw_dataset.take(100):
    
