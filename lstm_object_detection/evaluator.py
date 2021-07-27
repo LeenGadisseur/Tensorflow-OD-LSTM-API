@@ -214,7 +214,12 @@ def evaluate(create_input_dict_fn,
     metrics: A dictionary containing metric names and values from the latest
       run.
   """
-
+  session_config = tf.ConfigProto()
+  # LEEN aanpassing voor CUDA errors (init cuda  & memory allocation)
+  session_config.gpu_options.allow_growth = True
+  session_config.gpu_options.per_process_gpu_memory_fraction = 0.7
+  sess = tf.Session(config=session_config)
+  
   model = create_model_fn()
 
   if eval_config.ignore_groundtruth and not eval_config.export_path:
@@ -255,11 +260,6 @@ def evaluate(create_input_dict_fn,
         losses_dict is None. Necessary only for matching function signiture in
         third_party eval_util.py.
     """
-    session_config = tf.ConfigProto()
-    # LEEN aanpassing voor CUDA errors (init cuda  & memory allocation)
-    session_config.gpu_options.allow_growth = True
-    session_config.gpu_options.per_process_gpu_memory_fraction = 0.7
-    sess = tf.Session(config=session_config)
     if batch_index % 10 == 0:
       tf.logging.info('Running eval ops batch %d', batch_index)
     if not losses_dict:
@@ -324,11 +324,6 @@ def evaluate(create_input_dict_fn,
 
   def _restore_latest_checkpoint(sess):   
     latest_checkpoint = tf.train.latest_checkpoint(checkpoint_dir)
-    session_config = tf.ConfigProto()
-    # LEEN aanpassing voor CUDA errors (init cuda  & memory allocation)
-    session_config.gpu_options.allow_growth = True
-    session_config.gpu_options.per_process_gpu_memory_fraction = 0.7
-    sess = tf.Session(config=session_config)
     saver.restore(sess, latest_checkpoint)
 
   metrics = eval_util.repeated_checkpoint_run(

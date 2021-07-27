@@ -56,6 +56,7 @@ def main(unused_argv):
   if FLAGS.pipeline_config_path:
     configs = config_util.get_configs_from_pipeline_file(
         FLAGS.pipeline_config_path)
+
   else:
     configs = config_util.get_configs_from_multiple_files(
         model_config_path=FLAGS.model_config_path,
@@ -88,10 +89,16 @@ def main(unused_argv):
   def get_next(config, model_config, lstm_config, unroll_length):
     return seq_dataset_builder.build(config, model_config, lstm_config,
                                      unroll_length)
-
+                                     
+  print("Get next: ", get_next,'\n', 
+	"Input_config: ", input_config, '\n',
+	"Model_config: ", model_config,'\n',
+       "lstm_config: ",lstm_config,'\n',
+       "Unroll_lengts: ", lstm_config.eval_unroll_length)
   create_input_dict_fn = functools.partial(get_next, input_config, model_config,
                                            lstm_config,
                                            lstm_config.eval_unroll_length)
+
 
   label_map = label_map_util.load_labelmap(input_config.label_map_path)
   max_num_classes = max([item.id for item in label_map.item])

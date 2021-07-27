@@ -52,14 +52,6 @@ python eval.py \
 
 ```
 
-```
-python model_main.py \
-        --logtostderr \
-        --checkpoint_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/model.ckpt-7000 \
-        --eval_dir=models/my_ssd_mobilenet_v1_lstm/checkpoints/ckpt-96x96-b4-5k+7k/eval \
-        --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config 
-
-```
 
 Extraheren van een tflite graph.
 ```

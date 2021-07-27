@@ -132,6 +132,12 @@ def main(_):
         unroll_length,
         data_augmentation_options,
         batch_size=train_config.batch_size)
+        
+  print("Get next: ", get_next,'\n', 
+	"Input_config: ", input_config, '\n',
+	"Model_config: ", model_config,'\n',
+       "lstm_config: ",lstm_config,'\n',
+       "Unroll_lengts: ", lstm_config.train_unroll_length)
 
   create_input_dict_fn = functools.partial(get_next, input_config, model_config,
                                            lstm_config,
