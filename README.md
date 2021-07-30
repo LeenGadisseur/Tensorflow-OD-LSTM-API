@@ -37,9 +37,8 @@ Gebruik van files
 Het gebruik van de volgende files gebeurt steeds binnen de conda environment.
 
 
-Training en evaluatie van ssd_mobilenet_v1_lstm
----------------------------------------------
----------------------------------------------
+### Training en evaluatie van ssd_mobilenet_v1_lstm
+
 Commando voor trainen ssd_mobilenet_v1_lstm.
 ```
 python train.py --logtostderr \
@@ -58,9 +57,8 @@ python eval.py \
 
 ```
 
-Training en evaluatie van ssd_mobilenet_v2_interleaved_lstm
----------------------------------------------
----------------------------------------------
+### Training en evaluatie van ssd_mobilenet_v2_interleaved_lstm
+
 Commando voor trainen ssd_mobilenet_v2_interleaved_lstm.
 ```
 python train.py --logtostderr \
@@ -80,9 +78,8 @@ python eval.py \
 ```
 
 
-Extraheren van tflite modellen
-------------------------------
-------------------------------
+### Extraheren van tflite modellen
+
 Deze modellen kunnen omgezet worden naar TFLite modellen, dit kan als volgt:
 
 1. Extraheren van een graph file.
