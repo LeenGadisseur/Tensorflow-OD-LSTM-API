@@ -78,8 +78,8 @@ class LSTMSSDMobileNetV2FeatureExtractor(
         override_base_feature_extractor_hyperparams=
         override_base_feature_extractor_hyperparams)
     self._feature_map_layout = {
-        'from_layer': ['Conv2d_13_pointwise_lstm', '', '', '', ''],
-        'layer_depth': [-1, 512, 256, 256, 128],
+        'from_layer': ['layer_19', '', '', '', ''],
+        'layer_depth': [-1, 256, 256, 256, 256],
         'use_explicit_padding': self._use_explicit_padding,
         'use_depthwise': self._use_depthwise,
     }
@@ -131,9 +131,9 @@ class LSTMSSDMobileNetV2FeatureExtractor(
     The features include the base network features, lstm features and SSD
     features, organized in the following name scope:
 
-    <parent scope>/MobilenetV1/...
+    <parent scope>/MobilenetV2/...
     <parent scope>/LSTM/...
-    <parent scope>/FeatureMaps/...
+    <parent scope>/FeatureMap/...
 
     Args:
       preprocessed_inputs: A [batch, height, width, channels] float tensor
@@ -159,9 +159,9 @@ class LSTMSSDMobileNetV2FeatureExtractor(
           with tf.variable_scope(
               scope, self._base_network_scope,
               reuse=self._reuse_weights) as scope:
-            net, image_features = mobilenet_v2.mobilenet_v2_base(
+            net, image_features = mobilenet_v2.mobilenet_base(
                 ops.pad_to_multiple(preprocessed_inputs, self._pad_to_multiple),
-                final_endpoint='Conv2d_13_pointwise',
+                final_endpoint='layer_19',
                 min_depth=self._min_depth,
                 depth_multiplier=self._depth_multiplier,
                 scope=scope)
@@ -197,19 +197,19 @@ class LSTMSSDMobileNetV2FeatureExtractor(
                 state_saver.save_state('%s_step' % state_name, self._step + 1)
             ]
           with tf_ops.control_dependencies(batcher_ops):
-            image_features['Conv2d_13_pointwise_lstm'] = tf.concat(net_seq, 0)
+            image_features['layer_19'] = tf.concat(net_seq, 0)
 
           # Identities added for reading output states, to be reused externally.
           tf.identity(states_out[-1][0], name='lstm_state_out_c')
           tf.identity(states_out[-1][1], name='lstm_state_out_h')
 
         # SSD layers.
-        with tf.variable_scope('FeatureMaps', reuse=self._reuse_weights):
+        with tf.variable_scope('FeatureMap', reuse=self._reuse_weights):
           feature_maps = feature_map_generators.multi_resolution_feature_maps(
               feature_map_layout=self._feature_map_layout,
               depth_multiplier=(self._depth_multiplier),
               min_depth=self._min_depth,
               insert_1x1_conv=True,
-              image_features=image_features)
-
+              image_features=image_features,
+              pool_residual=True) #Added pool_residual
     return list(feature_maps.values())
