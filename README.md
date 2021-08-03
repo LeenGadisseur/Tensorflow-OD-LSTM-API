@@ -36,7 +36,6 @@ Gebruik van files
 ------------------
 Het gebruik van de volgende files gebeurt steeds binnen de conda environment.
 
-
 ### Training en evaluatie van ssd_mobilenet_v1_lstm
 
 Commando voor trainen ssd_mobilenet_v1_lstm.
@@ -56,6 +55,29 @@ python eval.py \
         --pipeline_config_path=models/my_ssd_mobilenet_v1_lstm/pipeline_shards.config 
 
 ```
+
+
+### Training en evaluatie van ssd_mobilenet_v2_lstm
+
+Commando voor trainen ssd_mobilenet_v2_lstm.
+```
+python train.py --logtostderr \
+	--train_dir=models/my_ssd_mobilenet_v2_lstm \
+	--pipeline_config_path=models/my_ssd_mobilenet_v2_lstm/pipeline_shards.config 
+
+```
+
+Commando voor evaluatie van ssd_mobilenet_v2_lstm.
+```
+python eval.py \
+        --logtostderr \
+        --checkpoint_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/.../model.ckpt \
+        --eval_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/.../eval \
+        --pipeline_config_path=models/my_ssd_mobilenet_v2_lstm/pipeline_shards.config 
+
+```
+
+
 
 ### Training en evaluatie van ssd_mobilenet_v2_interleaved_lstm
 
