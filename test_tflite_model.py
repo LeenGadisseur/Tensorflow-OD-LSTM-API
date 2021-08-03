@@ -37,6 +37,8 @@ def main(_):
   print('input_details:', input_details)
   output_details = interpreter.get_output_details()
   print('output_details:', output_details)
+  for detail in output_details:
+  	print("output_detail: ", detail)
 
   # Test model on random input data.
   input_shape = input_details[0]['shape']

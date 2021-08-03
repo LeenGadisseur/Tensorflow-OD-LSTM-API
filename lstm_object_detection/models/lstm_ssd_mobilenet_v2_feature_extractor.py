@@ -1,3 +1,4 @@
+#Leen Gadisseur
 # Copyright 2018 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +30,7 @@ from object_detection.utils import shape_utils
 from nets.mobilenet import mobilenet_v2
 
 
-class LSTMSSDMobileNetV2FeatureExtractor(
+class LSTMSSDMobilenetV2FeatureExtractor(
     lstm_ssd_meta_arch.LSTMSSDFeatureExtractor):
   """LSTM Feature Extractor using MobilenetV2 features."""
 
@@ -43,7 +44,7 @@ class LSTMSSDMobileNetV2FeatureExtractor(
                use_explicit_padding=False,
                use_depthwise=True,
                override_base_feature_extractor_hyperparams=False,
-               lstm_state_depth=256):
+               lstm_state_depth=320):
     """
     XXXX lstm depth aanpassen?
     Initializes instance of MobileNetV2 Feature Extractor for LSTMSSD Models.
@@ -66,7 +67,7 @@ class LSTMSSDMobileNetV2FeatureExtractor(
         `conv_hyperparams_fn`.
       lstm_state_depth: An integter of the depth of the lstm state.
     """
-    super(LSTMSSDMobileNetV2FeatureExtractor, self).__init__(
+    super(LSTMSSDMobilenetV2FeatureExtractor, self).__init__(
         is_training=is_training,
         depth_multiplier=depth_multiplier,
         min_depth=min_depth,
@@ -83,8 +84,7 @@ class LSTMSSDMobileNetV2FeatureExtractor(
         'use_explicit_padding': self._use_explicit_padding,
         'use_depthwise': self._use_depthwise,
     }
-    self._base_network_scope = 'MobilenetV2
-    '
+    self._base_network_scope = 'MobilenetV2'
     self._lstm_state_depth = lstm_state_depth
 
   def create_lstm_cell(self, batch_size, output_size, state_saver, state_name,
@@ -159,7 +159,7 @@ class LSTMSSDMobileNetV2FeatureExtractor(
           with tf.variable_scope(
               scope, self._base_network_scope,
               reuse=self._reuse_weights) as scope:
-            net, image_features = mobilenet_v2.mobilenet_base(
+            net, image_features = mobilenet_v2.mobilenet_base(  
                 ops.pad_to_multiple(preprocessed_inputs, self._pad_to_multiple),
                 final_endpoint='layer_19',
                 min_depth=self._min_depth,

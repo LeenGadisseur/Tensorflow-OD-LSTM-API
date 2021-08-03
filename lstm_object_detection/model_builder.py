@@ -17,6 +17,7 @@
 from lstm_object_detection.meta_architectures import lstm_ssd_meta_arch
 from lstm_object_detection.models import lstm_ssd_interleaved_mobilenet_v2_feature_extractor
 from lstm_object_detection.models import lstm_ssd_mobilenet_v1_feature_extractor
+from lstm_object_detection.models import lstm_ssd_mobilenet_v2_feature_extractor
 from object_detection.builders import anchor_generator_builder
 from object_detection.builders import box_coder_builder
 from object_detection.builders import box_predictor_builder
@@ -36,6 +37,9 @@ model_builder.SSD_FEATURE_EXTRACTOR_CLASS_MAP.update({
     'lstm_ssd_interleaved_mobilenet_v2':
         lstm_ssd_interleaved_mobilenet_v2_feature_extractor
         .LSTMSSDInterleavedMobilenetV2FeatureExtractor,
+    'lstm_ssd_mobilenet_v2':
+        lstm_ssd_mobilenet_v2_feature_extractor
+        .LSTMSSDMobilenetV2FeatureExtractor,
 })
 SSD_FEATURE_EXTRACTOR_CLASS_MAP = model_builder.SSD_FEATURE_EXTRACTOR_CLASS_MAP
 

@@ -10,6 +10,7 @@ scripts/pre_procesing/Data/EPFL/*.record
 
 
 models/my_ssd_mobilenet_v1_lstm/checkpoints/*
+models/my_ssd_mobilenet_v2_lstm/checkpoints/*
 models/my_ssd_mobilenet_v1_lstm_tflite/checkpoints/*
 models/my_ssd_mobilenet_v2_interleaved_lstm/checkpoints/*
 pre-trained-models/*
