@@ -20,7 +20,7 @@ from absl import flags
 import numpy as np
 import tensorflow.compat.v1 as tf
 
-flags.DEFINE_string('model_path', None, 'Path to model.')
+flags.DEFINE_string('model_path', 'models/my_ssd_mobilenet_v1_lstm_tflite/checkpoints/model.tflite', 'Path to model.')
 FLAGS = flags.FLAGS
 
 

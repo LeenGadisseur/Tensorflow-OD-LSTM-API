@@ -29,6 +29,8 @@ from object_detection.core import standard_fields as fields
 from object_detection.metrics import coco_evaluation
 from object_detection.utils import object_detection_evaluation
 
+import time
+
 
 # A dictionary of metric names to classes that implement the metric. The classes
 # in the dictionary must implement
@@ -70,8 +72,15 @@ def _create_detection_op(model, input_dict, batch):
   preprocessed_video, true_image_shapes = model.preprocess(
       tf.to_float(video_tensor))
   if batch is not None:
+    print('\t', "Batch is not none.")
+    print('\t', "Batch sequences: ", batch.sequences)
+    print('\t', "Batch batch_size: ", batch.batch_size)
+    start_time = time.time()
     prediction_dict = model.predict(preprocessed_video, true_image_shapes,
                                     batch)
+    end_time = time.time()
+    elapsed_time_batch = end_time - start_time
+    print('\t', "Elapsed time for batch: ",elapsed_time_batch)
   else:
     prediction_dict = model.predict(preprocessed_video, true_image_shapes)
 

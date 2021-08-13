@@ -71,8 +71,8 @@ Commando voor evaluatie van ssd_mobilenet_v2_lstm.
 ```
 python eval.py \
         --logtostderr \
-        --checkpoint_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/.../model.ckpt \
-        --eval_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/.../eval \
+        --checkpoint_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/b4-96x96-st5k/model.ckpt-5000 \
+        --eval_dir=models/my_ssd_mobilenet_v2_lstm/checkpoints/b4-96x96-st5k/eval \
         --pipeline_config_path=models/my_ssd_mobilenet_v2_lstm/pipeline_shards.config 
 
 ```
